@@ -11,50 +11,45 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > MIN_QUALITY
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            reduce_quality(item)
-          end
-        end
+      if item.name == "Aged Brie"
+        update_quality_for_brie(item)
+      elsif item.name.include? "Backstage passes"
+        update_quality_for_backstage(item)
+      elsif item.name.include? "Sulfuras"
+        break
       else
-        if item.quality < MAX_QUALITY
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < MAX_QUALITY
-                increase_quality(item)
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < MAX_QUALITY
-                increase_quality(item)
-              end
-            end
-          end
-        end
-      end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < MIN_QUALITY
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > MIN_QUALITY
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                reduce_quality(item)
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
-        else
-          if item.quality < MAX_QUALITY
-            increase_quality(item)
-          end
-        end
+        update_quality_standard(item)
       end
     end
+  end
+
+  private
+
+  def update_quality_for_brie(item)
+    increase_quality(item)
+    reduce_sell_in(item)
+  end
+
+  def update_quality_for_backstage(item)
+    if item.sell_in > 5 && item.sell_in < 11
+      increase_quality(item, 2)
+    elsif item.sell_in > 0 && item.sell_in < 6
+      increase_quality(item, 3)
+    elsif item.sell_in <= 0
+      item.quality = 0
+    else
+      increase_quality(item)
+    end
+    reduce_sell_in(item)
+  end
+
+  def update_quality_standard(item)
+    if item.sell_in <= 0
+      reduce_quality(item, 2)
+    else
+      reduce_quality(item, 1)
+    end
+    reduce_sell_in(item)
   end
 
   def reduce_quality(item, amount = 1)
@@ -71,6 +66,10 @@ class GildedRose
     else
       item.quality += amount
     end
+  end
+
+  def reduce_sell_in(item, amount = 1)
+    item.sell_in -= amount
   end
 
 end

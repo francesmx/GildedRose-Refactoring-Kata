@@ -20,4 +20,6 @@ Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime
 ## New Feature Required
 * “Conjured” items degrade in Quality twice as fast as normal items
 
+ALSO NEED TO CONSIDER EDGE CASES
+
 Feel free to make any changes to the UpdateQuality method and add any new code as long as everything still works correctly. However, do not alter the Item class or Items property as those belong to the goblin in the corner who will insta-rage and one-shot you as he doesn’t believe in shared code ownership (you can make the UpdateQuality method and Items property static if you like, we’ll cover for you).
