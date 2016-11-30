@@ -7,4 +7,8 @@ class Item
     @quality = quality
   end
 
+  def reduce_quality(amount)
+    @quality -= amount
+  end
+
 end
