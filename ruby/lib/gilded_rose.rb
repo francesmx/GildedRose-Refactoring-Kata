@@ -3,24 +3,29 @@ class GildedRose
   MAX_QUALITY = 50
   MIN_QUALITY = 0
 
-  attr_reader :items
-
   def initialize(items)
     @items = items
   end
 
+  def items
+    @items.dup
+  end
+
   def update_quality()
     @items.each do |item|
-      if item.name == "Aged Brie"
-        update_quality_for_brie(item)
-      elsif item.name.include? "Backstage passes"
-        update_quality_for_backstage(item)
-      elsif item.name.include? "Sulfuras"
-        increase_quality(item, 0)
-      elsif item.name.include? "Conjured"
-        update_quality_for_conjured(item)
-      else
-        update_quality_standard(item)
+      case
+        when item.name == "Aged Brie"
+          update_quality_for_brie(item)
+        when item.name == "Aged Brie"
+          update_quality_for_brie(item)
+        when item.name.include?("Backstage passes")
+          update_quality_for_backstage(item)
+        when item.name.include?("Sulfuras")
+          increase_quality(item, 0)
+        when item.name.include?("Conjured")
+          update_quality_for_conjured(item)
+        else
+          update_quality_standard(item)
       end
     end
   end
