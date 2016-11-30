@@ -2,10 +2,12 @@ require_relative '../lib/item'
 
 describe Item do
 
-  describe "#update_quality" do
-    it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
-      expect(items[0].name).to eq "foo"
+  describe "#initialize" do
+    it "initializes an item" do
+      item = Item.new("MyItem", 20, 50)
+      expect(item.name).to eq "MyItem"
+      expect(item.sell_in).to eq 20
+      expect(item.quality).to eq 50
     end
   end
 
