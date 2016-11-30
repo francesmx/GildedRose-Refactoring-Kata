@@ -10,7 +10,7 @@ class Item
     @quality = quality
   end
 
-  def reduce_quality(amount)
+  def reduce_quality(amount = 1)
     if amount > @quality
       @quality = MIN_QUALITY
     else
@@ -18,7 +18,7 @@ class Item
     end
   end
 
-  def increase_quality(amount)
+  def increase_quality(amount = 1)
     if @quality + amount > MAX_QUALITY
       @quality = MAX_QUALITY
     else
