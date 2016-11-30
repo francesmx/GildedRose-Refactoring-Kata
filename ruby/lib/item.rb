@@ -8,7 +8,11 @@ class Item
   end
 
   def reduce_quality(amount)
-    @quality -= amount
+    if amount > @quality
+      @quality = 0
+    else
+      @quality -= amount
+    end
   end
 
   def increase_quality(amount)
