@@ -11,4 +11,8 @@ class Item
     @quality -= amount
   end
 
+  def increase_quality(amount)
+    @quality += amount
+  end
+
 end

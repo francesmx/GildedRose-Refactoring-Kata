@@ -18,4 +18,12 @@ describe Item do
       expect(item.quality).to eq 49
     end
   end
+
+  describe '#increase_quality' do
+    it "increases the quality by the amount passed" do
+      item = Item.new("MyItem", 20, 50)
+      item.increase_quality(1)
+      expect(item.quality).to eq 51
+    end
+  end
 end
