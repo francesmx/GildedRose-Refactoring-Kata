@@ -4,33 +4,40 @@ describe Item do
 
   describe "#initialize" do
     it "initializes an item" do
-      item = Item.new("MyItem", 20, 50)
+      item = Item.new("MyItem", 20, 40)
       expect(item.name).to eq "MyItem"
       expect(item.sell_in).to eq 20
-      expect(item.quality).to eq 50
+      expect(item.quality).to eq 40
     end
   end
 
   describe '#reduce_quality' do
 
     it "reduces the quality by the amount passed" do
-      item = Item.new("MyItem", 20, 50)
+      item = Item.new("MyItem", 20, 40)
       item.reduce_quality(1)
-      expect(item.quality).to eq 49
+      expect(item.quality).to eq 39
     end
 
-    it "will not reduce the quality beyond 0, i.e. it won't go negative" do
-      item = Item.new("MyItem", 20, 50)
-      item.reduce_quality(51)
+    it "will not reduce the quality to below 0" do
+      item = Item.new("MyItem", 20, 40)
+      item.reduce_quality(41)
       expect(item.quality).to eq 0
     end
   end
 
   describe '#increase_quality' do
+
     it "increases the quality by the amount passed" do
-      item = Item.new("MyItem", 20, 50)
+      item = Item.new("MyItem", 20, 40)
       item.increase_quality(1)
-      expect(item.quality).to eq 51
+      expect(item.quality).to eq 41
+    end
+
+    it "will not increase the quality beyond 50" do
+      item = Item.new("MyItem", 20, 30)
+      item.increase_quality(21)
+      expect(item.quality).to eq 50
     end
   end
 end

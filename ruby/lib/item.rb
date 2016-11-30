@@ -16,7 +16,11 @@ class Item
   end
 
   def increase_quality(amount)
-    @quality += amount
+    if @quality + amount > 50
+      @quality = 50
+    else
+      @quality += amount
+    end
   end
 
 end
