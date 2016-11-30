@@ -16,7 +16,9 @@ class GildedRose
       elsif item.name.include? "Backstage passes"
         update_quality_for_backstage(item)
       elsif item.name.include? "Sulfuras"
-        break
+        increase_quality(item, 0)
+      elsif item.name.include? "Conjured"
+        update_quality_for_conjured(item)
       else
         update_quality_standard(item)
       end
@@ -39,6 +41,15 @@ class GildedRose
       item.quality = 0
     else
       increase_quality(item)
+    end
+    reduce_sell_in(item)
+  end
+
+  def update_quality_for_conjured(item)
+    if item.sell_in <= 0
+      reduce_quality(item, 4)
+    else
+      reduce_quality(item, 2)
     end
     reduce_sell_in(item)
   end
