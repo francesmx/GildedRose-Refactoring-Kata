@@ -1,6 +1,9 @@
 class Item
   attr_accessor :name, :sell_in, :quality
 
+  MAX_QUALITY = 50
+  MIN_QUALITY = 0
+
   def initialize(name, sell_in, quality)
     @name = name
     @sell_in = sell_in
@@ -9,15 +12,15 @@ class Item
 
   def reduce_quality(amount)
     if amount > @quality
-      @quality = 0
+      @quality = MIN_QUALITY
     else
       @quality -= amount
     end
   end
 
   def increase_quality(amount)
-    if @quality + amount > 50
-      @quality = 50
+    if @quality + amount > MAX_QUALITY
+      @quality = MAX_QUALITY
     else
       @quality += amount
     end

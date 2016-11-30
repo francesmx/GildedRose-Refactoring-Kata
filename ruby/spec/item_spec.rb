@@ -19,10 +19,10 @@ describe Item do
       expect(item.quality).to eq 39
     end
 
-    it "will not reduce the quality to below 0" do
+    it "will not reduce the quality to below the minimum quality" do
       item = Item.new("MyItem", 20, 40)
       item.reduce_quality(41)
-      expect(item.quality).to eq 0
+      expect(item.quality).to eq Item::MIN_QUALITY
     end
   end
 
@@ -37,7 +37,7 @@ describe Item do
     it "will not increase the quality beyond 50" do
       item = Item.new("MyItem", 20, 30)
       item.increase_quality(21)
-      expect(item.quality).to eq 50
+      expect(item.quality).to eq Item::MAX_QUALITY
     end
   end
 end
