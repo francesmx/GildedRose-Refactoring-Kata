@@ -38,14 +38,15 @@ class GildedRose
   end
 
   def update_quality_for_backstage(item)
-    if item.sell_in > 5 && item.sell_in < 11
-      increase_quality(item, 2)
-    elsif item.sell_in > 0 && item.sell_in < 6
-      increase_quality(item, 3)
-    elsif item.sell_in <= 0
-      item.quality = 0
-    else
-      increase_quality(item)
+    case
+      when item.sell_in > 5 && item.sell_in < 11
+        increase_quality(item, 2)
+      when item.sell_in > 0 && item.sell_in < 6
+        increase_quality(item, 3)
+      when item.sell_in <= 0
+        item.quality = 0
+      else
+        increase_quality(item)
     end
     reduce_sell_in(item)
   end
