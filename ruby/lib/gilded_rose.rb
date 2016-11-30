@@ -57,20 +57,20 @@ class GildedRose
     end
   end
 
-  # def reduce_quality(amount = 1)
-  #   if amount > @quality
-  #     @quality = MIN_QUALITY
-  #   else
-  #     @quality -= amount
-  #   end
-  # end
-  #
-  # def increase_quality(amount = 1)
-  #   if @quality + amount > MAX_QUALITY
-  #     @quality = MAX_QUALITY
-  #   else
-  #     @quality += amount
-  #   end
-  # end
+  def reduce_quality(item, amount = 1)
+    if amount > item.quality
+      item.quality = MIN_QUALITY
+    else
+      item.quality -= amount
+    end
+  end
+
+  def increase_quality(item, amount = 1)
+    if item.quality + amount > MAX_QUALITY
+      item.quality = MAX_QUALITY
+    else
+      item.quality += amount
+    end
+  end
 
 end
