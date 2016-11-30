@@ -1,6 +1,6 @@
-require File.join(File.dirname(__FILE__), '../lib/gilded_rose')
-require File.join(File.dirname(__FILE__), '../lib/item')
-require File.join(File.dirname(__FILE__), 'spec_helper')
+require_relative '../lib/gilded_rose'
+require_relative '../lib/item'
+require_relative 'spec_helper'
 
 describe GildedRose do
 

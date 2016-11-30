@@ -1,8 +1,3 @@
-#!/usr/bin/ruby -w
-# 
-# require File.join(File.dirname(__FILE__), '../lib/gilded_rose')
-# require File.join(File.dirname(__FILE__), '../lib/item')
-
 puts "OMGHAI!"
 items = [
   Item.new(name="+5 Dexterity Vest", sell_in=10, quality=20),

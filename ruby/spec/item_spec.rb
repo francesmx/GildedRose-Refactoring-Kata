@@ -1,12 +1,12 @@
-require File.join(File.dirname(__FILE__), '../lib/item')
-require 'test/unit'
+require_relative '../lib/item'
 
-class TestUntitled < Test::Unit::TestCase
+describe Item do
 
-  def test_foo
-    items = [Item.new("foo", 0, 0)]
-    GildedRose.new(items).update_quality()
-    assert_equal items[0].name, "foo"
+  describe "#update_quality" do
+    it "does not change the name" do
+      items = [Item.new("foo", 0, 0)]
+      expect(items[0].name).to eq "foo"
+    end
   end
 
 end
