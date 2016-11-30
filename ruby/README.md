@@ -7,15 +7,15 @@ Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime
 * At the end of each day our system lowers both values for every item
 
 ## The Rules
-* Once the sell by date has passed, Quality degrades twice as fast
+* Once the sell by date has passed, Quality degrades twice as fast - DONE
 * The Quality of an item is never negative - DONE
 * “Aged Brie” actually increases in Quality the older it gets - DONE
 * The Quality of an item is never more than 50 - DONE
-* “Sulfuras”, being a legendary item, never has to be sold or decreases in Quality
-* “Backstage passes”, like aged brie, increases in Quality as it’s SellIn value approaches;
-      Quality increases     by 2 when there are 10 days or less
-                        and by 3 when there are 5 days or less
-          but Quality drops to 0 after the concert
+* “Sulfuras”, being a legendary item, never has to be sold or decreases in Quality - DONE
+* “Backstage passes”, like aged brie, increases in Quality as it’s SellIn value approaches; - DONE
+      Quality increases     by 2 when there are 10 days or less - DONE
+                        and by 3 when there are 5 days or less - DONE
+          but Quality drops to 0 after the concert - DONE
 
 ## New Feature Required
 * “Conjured” items degrade in Quality twice as fast as normal items

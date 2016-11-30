@@ -7,13 +7,20 @@ describe GildedRose do
   describe "#update_quality" do
 
     before(:each) do
-      items = [Item.new("MyItem", 10, 40)]
+      item0 = Item.new("MyItem", 10, 40)
+      item1 = Item.new("MyItem", 0, 40)
+      items = [item0, item1]
       @gilded_rose = GildedRose.new(items)
     end
 
     it 'reduces the quality by 1 each time' do
       @gilded_rose.update_quality
       expect(@gilded_rose.items[0].quality).to eq 39
+    end
+
+    it 'reduces the quality by 2 after the sell by date has passed' do
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[1].quality).to eq 38
     end
 
     it "will not reduce the quality beyond the minimum" do
@@ -48,53 +55,54 @@ describe GildedRose do
       end
       expect(@gilded_rose.items[0].quality).to eq GildedRose::MAX_QUALITY
     end
-
   end
 
-  describe '#reduce_quality' do
+  describe "#update_quality for Sulfuras" do
 
     before(:each) do
-      items = [Item.new("MyItem", 10, 40)]
+      items = [Item.new("Sulfuras, Hand of Ragnaros", 10, 40)]
       @gilded_rose = GildedRose.new(items)
     end
 
-    it "reduces the quality by a default of 1" do
-      @gilded_rose.reduce_quality(@gilded_rose.items[0])
-      expect(@gilded_rose.items[0].quality).to eq 39
+    it "does not change in quality" do
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].quality).to eq 40
     end
 
-    it "reduces the quality by the amount passed" do
-      @gilded_rose.reduce_quality(@gilded_rose.items[0], 5)
-      expect(@gilded_rose.items[0].quality).to eq 35
-    end
-
-    it "will not reduce the quality to below the minimum quality" do
-      @gilded_rose.reduce_quality(@gilded_rose.items[0], 41)
-      expect(@gilded_rose.items[0].quality).to eq GildedRose::MIN_QUALITY
+    it "does not change its sell_in date" do
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].sell_in).to eq 10
     end
   end
 
-  describe '#increase_quality' do
+  describe "#update_quality for Backstage passes" do
 
-    before(:each) do
-      items = [Item.new("MyItem", 10, 40)]
+    it "increases in quality the older it gets" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 11, 20)]
       @gilded_rose = GildedRose.new(items)
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].quality).to eq 21
     end
 
-    it "increases the quality by a default of 1" do
-      @gilded_rose.increase_quality(@gilded_rose.items[0])
-      expect(@gilded_rose.items[0].quality).to eq 41
+    it "increases in quality by 2 once the sellin days gets to 10 or fewer" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 10, 20)]
+      @gilded_rose = GildedRose.new(items)
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].quality).to eq 22
     end
 
-    it "increases the quality by the amount passed" do
-      @gilded_rose.increase_quality(@gilded_rose.items[0], 5)
-      expect(@gilded_rose.items[0].quality).to eq 45
+    it "increases in quality by 3 once the sellin days gets to 5 or fewer" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 20)]
+      @gilded_rose = GildedRose.new(items)
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].quality).to eq 23
     end
 
-    it "will not increase the quality beyond 50" do
-      @gilded_rose.increase_quality(@gilded_rose.items[0], 11)
-      expect(@gilded_rose.items[0].quality).to eq GildedRose::MAX_QUALITY
+    it "drops the quality to 0 after the concert" do
+      items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 0, 20)]
+      @gilded_rose = GildedRose.new(items)
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].quality).to eq 0
     end
   end
-
 end
