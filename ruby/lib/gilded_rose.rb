@@ -14,7 +14,7 @@ class GildedRose
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > MIN_QUALITY
           if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
+            reduce_quality(item)
           end
         end
       else
@@ -23,12 +23,12 @@ class GildedRose
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
               if item.quality < MAX_QUALITY
-                item.quality = item.quality + 1
+                increase_quality(item)
               end
             end
             if item.sell_in < 6
               if item.quality < MAX_QUALITY
-                item.quality = item.quality + 1
+                increase_quality(item)
               end
             end
           end
@@ -42,7 +42,7 @@ class GildedRose
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > MIN_QUALITY
               if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
+                reduce_quality(item)
               end
             end
           else
@@ -50,7 +50,7 @@ class GildedRose
           end
         else
           if item.quality < MAX_QUALITY
-            item.quality = item.quality + 1
+            increase_quality(item)
           end
         end
       end

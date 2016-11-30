@@ -4,21 +4,26 @@ require_relative 'spec_helper'
 
 describe GildedRose do
 
-  before(:each) do
-    item1 = Item.new("MyItem", 10, 40)
-    items = [item1]
-    @gilded_rose = GildedRose.new(items)
-  end
+  describe "#update_quality for Aged Brie" do
 
-  describe "#update_quality" do
-
-    it "does not change the name" do
-      @gilded_rose.update_quality()
-      expect(@gilded_rose.items[0].name).to eq "MyItem"
+    before(:each) do
+      items = [Item.new("Aged Brie", 10, 40)]
+      @gilded_rose = GildedRose.new(items)
     end
+
+    it "increases in quality the older it gets" do
+      @gilded_rose.update_quality
+      expect(@gilded_rose.items[0].quality).to eq 41
+    end
+
   end
 
   describe '#reduce_quality' do
+
+    before(:each) do
+      items = [Item.new("MyItem", 10, 40)]
+      @gilded_rose = GildedRose.new(items)
+    end
 
     it "reduces the quality by a default of 1" do
       @gilded_rose.reduce_quality(@gilded_rose.items[0])
@@ -37,6 +42,11 @@ describe GildedRose do
   end
 
   describe '#increase_quality' do
+
+    before(:each) do
+      items = [Item.new("MyItem", 10, 40)]
+      @gilded_rose = GildedRose.new(items)
+    end
 
     it "increases the quality by a default of 1" do
       @gilded_rose.increase_quality(@gilded_rose.items[0])
