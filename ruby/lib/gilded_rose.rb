@@ -16,8 +16,6 @@ class GildedRose
       case
         when item.name == "Aged Brie"
           update_quality_for_brie(item)
-        when item.name == "Aged Brie"
-          update_quality_for_brie(item)
         when item.name.include?("Backstage passes")
           update_quality_for_backstage(item)
         when item.name.include?("Sulfuras")
