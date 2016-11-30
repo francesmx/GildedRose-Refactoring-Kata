@@ -4,12 +4,54 @@ require_relative 'spec_helper'
 
 describe GildedRose do
 
+  before(:all) do
+    item1 = Item.new("MyItem", 10, 40)
+    items = [item1]
+    @gilded_rose = GildedRose.new(items)
+  end
+
   describe "#update_quality" do
+
     it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "foo"
+      @gilded_rose.update_quality()
+      expect(@gilded_rose.items[0].name).to eq "MyItem"
     end
   end
+
+  # describe '#reduce_quality' do
+  #
+  #   it "reduces the quality by a default of 1" do
+  #     @gilded_rose.items[0].reduce_quality
+  #     expect(@gilded_rose.items[0].quality).to eq 39
+  #   end
+  #
+  #   it "reduces the quality by the amount passed" do
+  #     @gilded_rose.items[0].reduce_quality(5)
+  #     expect(@gilded_rose.items[0].quality).to eq 35
+  #   end
+  #
+  #   it "will not reduce the quality to below the minimum quality" do
+  #     @gilded_rose.items[0].reduce_quality(41)
+  #     expect(@gilded_rose.items[0].quality).to eq GildedRose::MIN_QUALITY
+  #   end
+  # end
+  #
+  # describe '#increase_quality' do
+  #
+  #   it "increases the quality by a default of 1" do
+  #     @gilded_rose.items[0].increase_quality
+  #     expect(@gilded_rose.items[0].quality).to eq 41
+  #   end
+  #
+  #   it "increases the quality by the amount passed" do
+  #     @gilded_rose.items[0].increase_quality(5)
+  #     expect(@gilded_rose.items[0].quality).to eq 45
+  #   end
+  #
+  #   it "will not increase the quality beyond 50" do
+  #     @gilded_rose.items[0].increase_quality(11)
+  #     expect(@gilded_rose.items[0].quality).to eq GildedRose::MAX_QUALITY
+  #   end
+  # end
 
 end

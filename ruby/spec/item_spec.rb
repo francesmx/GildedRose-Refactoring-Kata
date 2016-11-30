@@ -11,45 +11,4 @@ describe Item do
     end
   end
 
-  describe '#reduce_quality' do
-
-    it "reduces the quality by a default of 1" do
-      item = Item.new("MyItem", 20, 40)
-      item.reduce_quality
-      expect(item.quality).to eq 39
-    end
-
-    it "reduces the quality by the amount passed" do
-      item = Item.new("MyItem", 20, 40)
-      item.reduce_quality(5)
-      expect(item.quality).to eq 35
-    end
-
-    it "will not reduce the quality to below the minimum quality" do
-      item = Item.new("MyItem", 20, 40)
-      item.reduce_quality(41)
-      expect(item.quality).to eq Item::MIN_QUALITY
-    end
-  end
-
-  describe '#increase_quality' do
-
-    it "increases the quality by a default of 1" do
-      item = Item.new("MyItem", 20, 40)
-      item.increase_quality
-      expect(item.quality).to eq 41
-    end
-
-    it "increases the quality by the amount passed" do
-      item = Item.new("MyItem", 20, 40)
-      item.increase_quality(1)
-      expect(item.quality).to eq 41
-    end
-
-    it "will not increase the quality beyond 50" do
-      item = Item.new("MyItem", 20, 30)
-      item.increase_quality(21)
-      expect(item.quality).to eq Item::MAX_QUALITY
-    end
-  end
 end
